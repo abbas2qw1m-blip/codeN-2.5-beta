@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>404</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  align-items: center;
+  
+}
+
+.error-page {
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+#fuzzyText {
+  display: block;
+color: #daa520;
+  max-width: 100%;
+  margin-top: 100px;
+  cursor: default;
+}
+
+.error-page p {
+  font-size: 20px;
+  color: #aaa;
+}
+
+.error-page a {
+  color: goldenrod;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.error-page a:hover {
+  background: #fff;
+  color: #000;
+}
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+  <div class="relative overflow-hidden min-h-screen">
+  <div class="absolute inset-0 pointer-events-none blur-[50px] md:blur-[72px]"
+       style="background: radial-gradient(ellipse 120% 145% at 50% -50%, rgba(0,0,0,0) 60%, rgba(0, 102, 12, 210) 78%, rgba(0,0,0,0) 85%); mix-blend-mode: screen" aria-hidden="true"></div>
+  <div class="absolute inset-0 pointer-events-none blur-[50px] md:blur-[72px] opacity-80"
+       style="background: radial-gradient(ellipse 120% 145% at 50% -50%, rgba(0,0,0,0) 83.5%, #000000 84.5%, rgba(0,0,0,0) 85.5%); mix-blend-mode: lighten" aria-hidden="true"></div>
+  <div class="relative z-[1]">
+    <!-- Your content -->
+    <div class="error-page">
+      <canvas id="fuzzyText" aria-label="404"></canvas>
+      <p>Page Not Found</p>
+    
+      <a href="/index.html">Go Home</a>
+    </div>
+  </div>
+</div>
+
+  <!--script  -->
+  <script src="script/fuzzy-text.js"></script>
+</body>
+</html>
