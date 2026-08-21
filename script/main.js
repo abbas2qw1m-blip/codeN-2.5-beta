@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    console.log('🚀 بدء التحميل...');
+    console.log(' بدء التحميل...');
 
     // ========================================
     // 0. Global Variables
@@ -508,5 +508,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    console.log('✅ اكتمل تجهيز الكود بنجاح!');
+    console.log(' اكتمل تجهيز الكود بنجاح!');
 });
