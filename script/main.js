@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    console.log(' بدء التحميل...');
+    console.log('🚀 بدء التحميل...');
 
     // ========================================
     // 0. Global Variables
@@ -113,59 +113,30 @@ document.addEventListener('DOMContentLoaded', function () {
     );
 
     // Links Active States Highlights
-    gsap.to(".aHome", {
-        duration: 0.3,
-        color: "#D1B371",
-        scrollTrigger: {
-            trigger: ".hero",
-            start: "top 20%",
-            end: "bottom 20%",
-            toggleActions: "play reverse play reverse",
+    const navLinks = [
+        { selector: ".aHome", trigger: ".hero" },
+        { selector: ".aAbout", trigger: ".secTwo" },
+        { selector: ".aContent", trigger: ".contentSec" },
+        { selector: ".aFaq", trigger: ".faqSec" },
+        { selector: ".aPro", trigger: ".proSec" }
+    ];
+
+    navLinks.forEach(link => {
+        if (document.querySelector(link.selector) && document.querySelector(link.trigger)) {
+            gsap.to(link.selector, {
+                duration: 0.3,
+                color: "#D1B371",
+                scrollTrigger: {
+                    trigger: link.trigger,
+                    start: "top 20%",
+                    end: "bottom 20%",
+                    toggleActions: "play reverse play reverse",
+                }
+            });
         }
     });
 
-    gsap.to(".aAbout", {
-        duration: 0.3,
-        color: "#D1B371",
-        scrollTrigger: {
-            trigger: ".secTwo",
-            start: "top 20%",
-            end: "bottom 20%",
-            toggleActions: "play reverse play reverse",
-        }
-    });
-
-    gsap.to(".aContent", {
-        duration: 0.3,
-        color: "#D1B371",
-        scrollTrigger: {
-            trigger: ".contentSec",
-            start: "top 20%",
-            end: "bottom 20%",
-            toggleActions: "play reverse play reverse",
-        }
-    });
-    gsap.to(".aFaq", {
-        duration: 0.3,
-        color: "#D1B371",
-        scrollTrigger: {
-            trigger: ".faqSec",
-            start: "top 20%",
-            end: "bottom 20%",
-            toggleActions: "play reverse play reverse",
-        }
-    });
-    gsap.to(".aPro", {
-        duration: 0.3,
-        color: "#D1B371",
-        scrollTrigger: {
-            trigger: ".proSec",
-            start: "top 20%",
-            end: "bottom 20%",
-            toggleActions: "play reverse play reverse",
-        }
-    });
-    // FAQ Section
+    // FAQ Section Animations
     gsap.fromTo(".FAQTitle",
         { opacity: 0, y: 300 },
         {
@@ -183,11 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     );
 
     gsap.fromTo(".faqForm",
-        {
-            opacity: 0,
-            y: 60,
-            scale: 0.96
-        },
+        { opacity: 0, y: 60, scale: 0.96 },
         {
             opacity: 1,
             y: 0,
@@ -202,20 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     );
-    gsap.fromTo(".faqForm",
-        { opacity: 0, y: 50 },
-        {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            scrollTrigger: {
-                trigger: ".faqSec",
-                start: "top 70%",
-                toggleActions: "play none none reverse"
-            }
-        }
-    );
-
 
     gsap.from(".faq-image, .faq-subheading, .faq-title, .faq-description, #faqContainer", {
         opacity: 0,
@@ -231,9 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
             markers: false,
         }
     });
-    // ========================================
-    //  projectSection
-    // ========================================
+
+    // Project Section
     gsap.fromTo(".PROTitle",
         { opacity: 0, y: 300 },
         {
@@ -249,9 +201,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     );
-    // =========================================
-    //  contentSection
-    // ========================================
+
+    // Content Section
     gsap.fromTo(".CONTitle",
         { opacity: 0, y: 300 },
         {
@@ -267,21 +218,22 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     );
-gsap.fromTo(".cards-container",
-{opacity: 0, y:300 },
-{
-    opacity: 1,
-    y: 0,
-    duration: 6,
-    scrollTrigger: {
-        trigger: ".contentSec",
-        start: "top 60%",
-        end: "top 10%",
-        scrub: true,
-        markers: false,
-    }
-}
-);
+
+    gsap.fromTo(".cards-container",
+        { opacity: 0, y: 300 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 6,
+            scrollTrigger: {
+                trigger: ".contentSec",
+                start: "top 60%",
+                end: "top 10%",
+                scrub: true,
+                markers: false,
+            }
+        }
+    );
 
     // ========================================
     // 4. AOS Initialization
@@ -412,39 +364,38 @@ gsap.fromTo(".cards-container",
         body.style.overflow = "auto";
     }, 2000);
 
-    console.log('✅ اكتمل تجهيز الكود بنجاح!');
-});
-// ===========================
-//      FAQ Section
-// ===========================
-const faqs = [
-    {
-        question: "How to use this component?",
-        answer: "To use this component, you need to import it in your project and use it in your JSX code. Here's an example of how to use it:",
-    },
-    {
-        question: "Are there any other components available?",
-        answer: "Yes, there are many other components available in this library. You can find them in the 'Components' section of the website.",
-    },
-    {
-        question: "Are components responsive?",
-        answer: "Yes, all components are responsive and can be used on different screen sizes.",
-    },
-    {
-        question: "Can I customize the components?",
-        answer: "Yes, you can customize the components by passing props to them. You can find more information about customizing components in the 'Customization' section of the website.",
-    },
-];
+    // ========================================
+    // 10. FAQ Component Dynamic Building
+    // ========================================
+    const faqs = [
+        {
+            question: "How to use this component?",
+            answer: "To use this component, you need to import it in your project and use it in your JSX code. Here's an example of how to use it:",
+        },
+        {
+            question: "Are there any other components available?",
+            answer: "Yes, there are many other components available in this library. You can find them in the 'Components' section of the website.",
+        },
+        {
+            question: "Are components responsive?",
+            answer: "Yes, all components are responsive and can be used on different screen sizes.",
+        },
+        {
+            question: "Can I customize the components?",
+            answer: "Yes, you can customize the components by passing props to them. You can find more information about customizing components in the 'Customization' section of the website.",
+        },
+    ];
 
-const container = document.getElementById("faqContainer");
+    const container = document.getElementById("faqContainer");
 
-faqs.forEach((faq, index) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "faq-item";
+    if (container) {
+        faqs.forEach((faq, index) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "faq-item";
 
-    const header = document.createElement("div");
-    header.className = "faq-header";
-    header.innerHTML = `
+            const header = document.createElement("div");
+            header.className = "faq-header";
+            header.innerHTML = `
                 <h3 class="faq-question">${faq.question}</h3>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -455,34 +406,35 @@ faqs.forEach((faq, index) => {
                 </svg>
             `;
 
-    const answer = document.createElement("p");
-    answer.className = "answer";
-    answer.textContent = faq.answer;
+            const answer = document.createElement("p");
+            answer.className = "answer";
+            answer.textContent = faq.answer;
 
-    wrapper.appendChild(header);
-    wrapper.appendChild(answer);
-    container.appendChild(wrapper);
+            wrapper.appendChild(header);
+            wrapper.appendChild(answer);
+            container.appendChild(wrapper);
 
-    header.addEventListener("click", () => {
-        const allAnswers = document.querySelectorAll(".answer");
-        const allIcons = document.querySelectorAll(".icon");
+            header.addEventListener("click", () => {
+                const allAnswers = document.querySelectorAll(".answer");
+                const allIcons = document.querySelectorAll(".icon");
 
-        allAnswers.forEach((el, i) => {
-            if (i === index) {
-                const isOpen = el.classList.contains("open");
-                el.classList.toggle("open", !isOpen);
-                allIcons[i].classList.toggle("rotate-180", !isOpen);
-            } else {
-                el.classList.remove("open");
-                allIcons[i].classList.remove("rotate-180");
-            }
+                allAnswers.forEach((el, i) => {
+                    if (i === index) {
+                        const isOpen = el.classList.contains("open");
+                        el.classList.toggle("open", !isOpen);
+                        allIcons[i].classList.toggle("rotate-180", !isOpen);
+                    } else {
+                        el.classList.remove("open");
+                        allIcons[i].classList.remove("rotate-180");
+                    }
+                });
+            });
         });
-    });
-});
-// ===========================
-//      Video Gallery
-// ===========================
-document.addEventListener('DOMContentLoaded', () => {
+    }
+
+    // ========================================
+    // 11. Video Gallery Logic
+    // ========================================
     const wrappers = document.querySelectorAll('.vgal-player-wrapper');
 
     wrappers.forEach(wrapper => {
@@ -493,13 +445,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressBar = wrapper.querySelector('.progress-bar');
         const progressContainer = wrapper.querySelector('.progress-container');
 
-        function togglePlay() {
+        if (!video) return;
 
+        function togglePlay() {
             if (video.paused) {
                 document.querySelectorAll('.vgal-player').forEach(v => {
                     if (v !== video) {
                         v.pause();
-                        v.closest('.vgal-player-wrapper').classList.remove('is-playing');
+                        const pWrapper = v.closest('.vgal-player-wrapper');
+                        if (pWrapper) pWrapper.classList.remove('is-playing');
                     }
                 });
 
@@ -514,10 +468,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (overlay) overlay.addEventListener('click', togglePlay);
-        if (toggleBtn) toggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            togglePlay();
-        });
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                togglePlay();
+            });
+        }
 
         if (muteBtn) {
             muteBtn.addEventListener('click', (e) => {
@@ -551,4 +507,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (progressBar) progressBar.style.width = '0%';
         });
     });
+
+    console.log('✅ اكتمل تجهيز الكود بنجاح!');
 });
